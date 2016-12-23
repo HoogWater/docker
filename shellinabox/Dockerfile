@@ -1,13 +1,13 @@
 # lets use my default centos7 base image
-FROM lvlie/base
+FROM hoogwater/base
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # Install packages 
 RUN yum install -y shellinabox openssh-clients && yum clean all
 
 # add user for media
-RUN useradd -u 800 ssh
+RUN useradd -u 1000 ssh
 
 # usuall runs on 8081
 EXPOSE 4200

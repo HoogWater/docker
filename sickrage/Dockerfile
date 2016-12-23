@@ -1,7 +1,7 @@
 # lets use my default centos7 base image
-FROM lvlie/base
+FROM hoogwater/base
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # Need git, but run yum clean all after each yum command to clear cache for this layer
 RUN yum install -y git && yum clean all
@@ -13,7 +13,7 @@ RUN yum install -y python-cheetah.x86_64 && yum clean all
 RUN git clone https://github.com/SickRage/SickRage.git sickrage
 
 # add user for media
-RUN useradd -u 800 media
+RUN useradd -u 1000 media
 
 # usuall runs on 8081
 EXPOSE 8081

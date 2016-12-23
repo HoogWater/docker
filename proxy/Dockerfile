@@ -1,7 +1,7 @@
 # lets use my default centos7 base image
-FROM lvlie/base
+FROM hoogwater/base
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # Install packages 
 RUN yum install -y httpd mod_ssl && yum clean all

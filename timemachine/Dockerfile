@@ -1,7 +1,7 @@
 # use ubuntu because avahi seems to work in docker, but use LTS
 FROM ubuntu:trusty
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # update package list
 RUN apt-get update 
@@ -10,7 +10,7 @@ RUN apt-get update
 RUN apt-get install -y netatalk avahi-daemon && apt-get clean
 
 # add user for backup
-RUN useradd -u 800 tm
+RUN useradd -u 1000 tm
 # password will be backup, why not in my lan... :) 
 RUN echo "tm:backup"|chpasswd
 

@@ -1,16 +1,19 @@
 # lets use my default centos7 base image
-FROM lvlie/base
+FROM hoogwater/base
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # Need git, but run yum clean all after each yum command to clear cache for this layer
-RUN yum install -y git && yum clean all
+RUN yum install -y git python-pip openssl gcc openssl-devel && yum clean all
+RUN yum install -y python-devel && yum clean all
+RUN yum install -y libffi-devel && yum clean all
+RUN pip install pyopenssl --upgrade
 
 # get latest git data
 RUN git clone https://github.com/RuudBurger/CouchPotatoServer.git
 
 # add user for media
-RUN useradd -u 800 media
+RUN useradd -u 1000 media
 
 # add start.sh
 ADD start.sh /start.sh

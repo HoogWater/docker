@@ -1,4 +1,4 @@
-# Docker compose file for lvlie docker images. We use the automatically built docker images from the hub, so we dont specify the build key. 
+# Docker compose file for hoogwater docker images. We use the automatically built docker images from the hub, so we dont specify the build key. 
 # The source however is in the same git repository. 
 
 version: '2' 
@@ -7,23 +7,43 @@ services:
   shellinabox:
     container_name: shellinabox
     build: ./shellinabox
-    image: docker.io/lvlie/shellinabox
+    image: docker.io/hoogwater/shellinabox
     ports:
       - "4200:4200"
   proxy:
     container_name: proxy
     build: ./proxy
-    image: docker.io/lvlie/proxy
+    image: docker.io/hoogwater/proxy
     ports:
       - "443:443"
     volumes:
       - /config/httpd/:/config/httpd/:ro
+  utorrent:
+    image: hoogwater/utorrent
+    build: ./utorrent
+    container_name: utorrent
+    network_mode: "host"
+    volumes:
+        - /data/downloads:/data
+        - /config/utorrent:/utorrent
+    restart: always
+  deluge:
+    container_name: deluge
+    build: ./deluge
+    image: hoogwater/deluge
+    network_mode: "host"
+    environment:
+      - PUID=1000
+      - PGID=1000
+    volumes:
+      - /config/deluge:/config/deluge
+      - /data/downloads:/data/downloads
   sabnzbd:
     container_name: sabnzbd
     build: ./sabnzbd
-    image: docker.io/lvlie/sabnzbd
+    image: docker.io/hoogwater/sabnzbd
     ports:
-      - "8080:8080"
+      - "8082:8080"
     volumes:
       - /config/sabnzbd:/config/sabnzbd/
       - /data/cache/:/cache/
@@ -31,17 +51,18 @@ services:
   sickrage:
     container_name: sickrage
     build: ./sickrage
-    image: docker.io/lvlie/sickrage
+    image: docker.io/hoogwater/sickrage
     ports:
       - "8081:8081"
     volumes:
       - /config/sickrage/:/config/sickrage/
       - /data/TV/:/data/TV/
+      - /data/downloads/:/data/downloads/
       - /data/cache/:/cache/
   couchpotato:
     container_name: couchpotato
     build: ./couchpotato
-    image: docker.io/lvlie/couchpotato
+    image: docker.io/hoogwater/couchpotato
     ports: 
       - "5050:5050"
     volumes:
@@ -51,15 +72,16 @@ services:
   plex:
     container_name: plex
     build: ./plex
-    image: docker.io/lvlie/plex
+    image: hoogwater/plex
     network_mode: "host"
+    pid: "host"
     volumes: 
       - /config/plex/:/config/plex/
       - /data/:/data/
   timemachine:
     container_name: timemachine
     build: ./timemachine
-    image: docker.io/lvlie/timemachine
+    image: docker.io/hoogwater/timemachine
     network_mode: "host"
     volumes: 
       - /data/backup/:/backup/
@@ -73,3 +95,10 @@ services:
       - NET_ADMIN
     volumes:
       - /config/vpn/:/etc/openvpn/
+  noip:
+    container_name: noip
+    image: docker.io/lvlie/noip
+    build: ./no-ip
+    volumes:
+      - /config/noip/:/config/noip/
+

@@ -1,7 +1,7 @@
 # ubuntu has a regularly updated repo, so lets use that (but use LTS)
 FROM ubuntu:trusty
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # update package list
 RUN apt-get update 
@@ -22,7 +22,7 @@ RUN apt-get update
 RUN apt-get install -y sabnzbdplus unrar zip && apt-get clean
 
 # add user for media
-RUN useradd -u 800 media
+RUN useradd -u 1000 media
 
 # add the startup script
 ADD start.sh /start.sh

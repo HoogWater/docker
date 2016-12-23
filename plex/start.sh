@@ -6,7 +6,7 @@ test -d /config || exit 1
 test -d /data || exit 2
 # create /config/couchpotato if it doesnt exist
 test -d /config/plex || mkdir /config/plex
-chown -R media:media /config/plex
+#chown -R media:media /config/plex
 
 # remove pid file
 rm -f "/config/plex/Library/Application Support/Plex Media Server/plexmediaserver.pid"

@@ -1,7 +1,7 @@
 # Add a layer for easy customization of all my centos7 images
 FROM centos:centos7
 
-MAINTAINER Leon (lvlie) Vliegenthart
+MAINTAINER Leon (hoogwater) Vliegenthart
 
 # Update the image
 RUN yum -y update && yum clean all
