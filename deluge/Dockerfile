@@ -1,5 +1,5 @@
 FROM lsiobase/alpine:edge
-MAINTAINER Mark de Jong <markdejong@gmail.com>
+MAINTAINER HoogWater <github@nietsnel.nl>
 
 # environment variables
 ENV PYTHON_EGG_CACHE="/config/plugins/.python-eggs"
